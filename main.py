@@ -11,7 +11,7 @@ dashboard_frame = tk.Frame(root)
 root.title("Mini Banking System")
 
 root.geometry("500x650")
-root.resizable(False, False)
+root.resizable(True, True)
 
 pin = ""
 
@@ -50,9 +50,11 @@ def login():
     result = check_pin(pin)
 
     if result == "success":
-        messagebox.showinfo("Login Successfull",
+        messagebox.showinfo("Login Successful",
                             "Welcome to Mini Banking System"
         )
+
+        show_dashboard()
         
         pin = ""
         update_display()
@@ -108,6 +110,16 @@ login_button = tk.Button(login_frame, text= "LOGIN", font=("Arial", 14, "bold"),
 login_button.pack(pady=20)
 
 login_frame.pack(fill = "both", expand=True)
+
+def show_dashboard():
+    login_frame.pack_forget() #Hides the login frame
+    dashboard_frame.pack(fill="both",expand =True)
+
+dashboard_title = tk.Label(dashboard_frame, text = "Dashboard", font=("Arial", 24,"bold"))
+dashboard_title.pack(pady=20)
+
+welcome = tk.Label(dashboard_frame, text= "Welcome!", font=("Arial", 16))
+welcome.pack()
 
 root.mainloop()
                     

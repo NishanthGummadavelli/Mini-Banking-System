@@ -1,5 +1,8 @@
 
+
 import tkinter as tk
+from tkinter import messagebox
+from banking import check_pin
 
 root = tk.Tk()
 
@@ -39,6 +42,36 @@ def backspace():
     pin = pin[:-1]
     update_display()
 
+def login():
+    global pin
+
+    result = check_pin(pin)
+
+    if result == "success":
+        messagebox.showinfo("Login Successfull",
+                            "Welcome to Mini Banking System"
+        )
+        
+        pin = ""
+        update_display()
+        
+    elif result == "Invalid_pin":
+        messagebox.showerror("Login Failed",
+                             "Incorrect PIN"
+        )
+        
+        pin = ""
+        update_display()
+        
+    elif result == "locked":
+        messagebox.showerror(
+            "Account Locked",
+            "Account locked due to three invalid PIN attempts."
+        )
+        
+        pin = ""
+        update_display()
+
 keypad = tk.Frame(root)
 keypad.pack(pady=20)
 
@@ -69,8 +102,9 @@ for text, row, column in buttons:
     button = tk.Button(keypad, text =text, width=8, height=2, font = ("Arial", 12), command = command)
     button.grid(row=row, column= column, padx=5, pady= 5)
 
-login_button = tk.Button(root, text= "LOGIN", font=("Arial", 14, "bold"), fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46")
+login_button = tk.Button(root, text= "LOGIN", font=("Arial", 14, "bold"), fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46", command = login)
 login_button.pack(pady=20)
+
 
 
 root.mainloop()

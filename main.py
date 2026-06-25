@@ -5,6 +5,8 @@ from tkinter import messagebox
 from banking import check_pin
 
 root = tk.Tk()
+login_frame = tk.Frame(root)
+dashboard_frame = tk.Frame(root)
 
 root.title("Mini Banking System")
 
@@ -13,10 +15,10 @@ root.resizable(False, False)
 
 pin = ""
 
-title_label = tk.Label(root, text= "Mini Banking System", font =("Arial", 20, "bold"))
+title_label = tk.Label(login_frame, text= "Mini Banking System", font =("Arial", 20, "bold"))
 title_label.pack(pady=20)
 
-display = tk.Entry(root,font = ("Arial", 18), justify = "center",show = "*", width = 12, state = "readonly")
+display = tk.Entry(login_frame,font = ("Arial", 18), justify = "center",show = "*", width = 12, state = "readonly")
 display.pack(pady=10)
 
 def update_display():
@@ -72,7 +74,7 @@ def login():
         pin = ""
         update_display()
 
-keypad = tk.Frame(root)
+keypad = tk.Frame(login_frame)
 keypad.pack(pady=20)
 
 buttons = [
@@ -102,10 +104,10 @@ for text, row, column in buttons:
     button = tk.Button(keypad, text =text, width=8, height=2, font = ("Arial", 12), command = command)
     button.grid(row=row, column= column, padx=5, pady= 5)
 
-login_button = tk.Button(root, text= "LOGIN", font=("Arial", 14, "bold"), fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46", command = login)
+login_button = tk.Button(login_frame, text= "LOGIN", font=("Arial", 14, "bold"), fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46", command = login)
 login_button.pack(pady=20)
 
-
+login_frame.pack(fill = "both", expand=True)
 
 root.mainloop()
                     

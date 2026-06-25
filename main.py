@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from banking import check_pin
+from storage import load_account
 
 root = tk.Tk()
 login_frame = tk.Frame(root)
@@ -112,14 +113,36 @@ login_button.pack(pady=20)
 login_frame.pack(fill = "both", expand=True)
 
 def show_dashboard():
+
+    account = load_account()
+
+    welcome_label.config(
+        text = f"Welcome, {account['account_holder']}"
+    )
+
+    account_label.config(
+        text = f"Account Number : {account['account_number']}"
+    )
+
+    balance_label.config(
+        text = f"Current Balance : {account['balance']}"
+    )
+
+    
     login_frame.pack_forget() #Hides the login frame
     dashboard_frame.pack(fill="both",expand =True)
 
-dashboard_title = tk.Label(dashboard_frame, text = "Dashboard", font=("Arial", 24,"bold"))
+dashboard_title = tk.Label(dashboard_frame, text = "Mini Banking System", font=("Arial", 20,"bold"))
 dashboard_title.pack(pady=20)
 
-welcome = tk.Label(dashboard_frame, text= "Welcome!", font=("Arial", 16))
-welcome.pack()
+welcome_label = tk.Label(dashboard_frame, font=("Arial", 16))
+welcome_label.pack(pady=5)
+
+account_label = tk.Label(dashboard_frame, font=("Arial", 14))
+account_label.pack(pady=5)
+
+balance_label = tk.Label(dashboard_frame, font=("Arial", 14, "bold"))
+balance_label.pack(pady=10)
 
 root.mainloop()
                     

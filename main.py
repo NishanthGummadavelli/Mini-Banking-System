@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import messagebox
-from banking import check_pin, deposit_money
+from banking import check_pin, deposit_money, withdraw_money
 from storage import load_account
 
 root = tk.Tk()
@@ -190,8 +190,8 @@ def open_deposit_window():
                 "Deposit Successful",
                 f"₹{amount} deposited successfully."
             )
-        show_dashboard()
-        deposit_window.destroy()
+            show_dashboard()
+            deposit_window.destroy()
             
 
     deposit_confirm_button = tk.Button(deposit_window, text="Deposit", width=15,fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46",command =deposit)
@@ -199,6 +199,68 @@ def open_deposit_window():
 
 deposit_button = tk.Button(button_frame, text= "Deposit", font=("Arial", 12, "bold"), width =20, height=2, command=open_deposit_window)
 deposit_button.pack(pady=5)
+
+
+def open_withdraw_window():
+
+    withdraw_window = tk.Toplevel(root)
+    withdraw_window.title("Withdraw Money")
+    withdraw_window.geometry("450x300")
+    withdraw_window.resizable(False, False)
+
+    amount_label = tk.Label(withdraw_window, text = "Enter Withdrawal Amount", font=("Arial", 12))
+    amount_label.pack(pady=10)
+
+    amount_entry = tk.Entry(withdraw_window, font=("Arial", 14), justify = "center")
+    amount_entry.pack(pady=10)
+
+
+    def withdraw():
+
+        amount = amount_entry.get()
+
+        if amount == "":
+            messagebox.showerror(
+                "Error",
+                "Please enter an amount."
+            )
+            return
+        try:
+            amount = int(amount)
+        except ValueError:
+            messagebox.showerror(
+                "Error",
+                "Please enter a valid number."
+            )
+            return
+        result = withdraw_money(amount)
+
+        if result == "invalid_amount":
+             messagebox.showerror(
+                "Invalid amount",
+                "Amount must be greater than zero."
+            )
+             
+        elif result == "insufficient_balance":
+            messagebox.showerror(
+                "Error",
+                "Insufficeint Funds."
+            )
+        else:
+            messagebox.showinfo(
+                "Withdrawal Successful",
+                f"₹{amount} withdrawn successfullly.")
+            show_dashboard()
+            withdraw_window.destroy()
+
+    withdraw_confirm_button = tk.Button(withdraw_window, text="Withdraw", width=15,height=2,command=withdraw)
+    withdraw_confirm_button.pack(pady=15)
+            
+        
+
+withdraw_button = tk.Button(button_frame,text="Withdraw", width=20,height=2,font=("Arial",12,"bold"),command=open_withdraw_window)
+withdraw_button.pack(pady=5)
+    
 
 
 root.mainloop()

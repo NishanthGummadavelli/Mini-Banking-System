@@ -33,4 +33,17 @@ def deposit_money(amount):
     save_account(account)
 
     return "Success"
+def withdraw_money(amount):
+    account = load_account()
+
+    if amount <= 0:
+        return "invalid_amount"
+    if amount > account['balance']:
+        return "insufficient_balance"
+    account["balance"] -= amount
+    account["transactions"].append(f"Withdrew ₹{amount}")
+
+    save_account(account)
+
+    return "success"
     

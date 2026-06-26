@@ -2,12 +2,11 @@
     "account_holder": "Nishanth G",
     "account_number": "1001",
     "pin": "1234",
-    "balance": 6000,
+    "balance": 5000,
     "failed_attempts": 0,
     "locked": false,
     "transactions": [
-        "Deposited \u20b91000",
-        "Deposited \u20b9500",
-        "Withdrew \u20b9500"
+        "26-06-2026 11:48 AM - Deposited ₹1000",
+        "26-06-2026 11:51 AM - Withdrew ₹1000"
     ]
 }

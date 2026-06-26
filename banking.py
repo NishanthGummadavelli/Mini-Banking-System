@@ -1,4 +1,5 @@
 from storage import load_account, save_account
+from datetime import datetime
 
 def check_pin(entered_pin):
     account = load_account()
@@ -28,7 +29,9 @@ def deposit_money(amount):
         return "Invalid_amount"
     account["balance"] += amount
 
-    account["transactions"].append(f"Deposited ₹{amount}")
+    current_time = datetime.now().strftime("%d-%m-%Y %I:%M %p")
+
+    account["transactions"].append(f"{current_time} - Deposited ₹{amount}")
 
     save_account(account)
 
@@ -41,7 +44,10 @@ def withdraw_money(amount):
     if amount > account['balance']:
         return "insufficient_balance"
     account["balance"] -= amount
-    account["transactions"].append(f"Withdrew ₹{amount}")
+
+    current_time = datetime.now().strftime("%d-%m-%Y %I:%M %p")
+    
+    account["transactions"].append(f"{current_time} - Withdrew ₹{amount}")
 
     save_account(account)
 

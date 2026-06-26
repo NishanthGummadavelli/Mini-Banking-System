@@ -271,23 +271,26 @@ def open_history_window():
     account = load_account()
     transactions = account["transactions"]
 
-    list_frame = tk.Frame(history_window)
-    list_frame.pack(pady=20)
+    tree = ttk.Treeview(history_window, columns=("datetime","transaction"),show="headings",height=12)
 
-    scrollbar = tk.Scrollbar(list_frame)
-    scrollbar.pack(side=tk.RIGHT, fill= tk.Y)
+    tree.heading("datetime", text="Date & Time")
+    tree.heading("transaction", text="Transaction")
 
-    history_listbox = tk.Listbox(list_frame, width=70,height=15,font=("Arial",11),yscrollcommand=scrollbar.set)
-    history_listbox.pack(side=tk.LEFT)
+    tree.column("datetime",width=220,anchor="center")
+    tree.column("transaction",width=350,anchor="w")
 
-    scrollbar.config(command=history_listbox.yview)
+    scrollbar = ttk.Scrollbar(history_window,orient="vertical",command=tree.yview)
+    tree.configure(yscrollcommand=scrollbar.set)
 
-    #Handle Empty History
+    tree.pack(side="left",fill="both",expand="True",padx=10,pady=15)
+    scrollbar.pack(side="right",fill="y")
+
     if not transactions:
-        history_listbox.insert(tk.END, "No recent transactions")
+        tree.insert("",tk.END,values=("","No transactions available."))
     else:
-        for transaction in transactions:
-            history_listbox.insert(tk.END, transaction)
+        for entry in transactions:
+            date_time,transaction = entry.split(" - ", 1)
+            tree.insert("",tk.END,values=(date_time,transaction))
 
     close_button = tk.Button(history_window, text= "Close", bg= "red",width=15,command=history_window.destroy)
     close_button.pack(pady=10)

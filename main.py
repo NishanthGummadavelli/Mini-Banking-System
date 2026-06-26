@@ -377,6 +377,25 @@ def open_change_pin_window():
         
 change_pin_button = tk.Button(button_frame,text="Change PIN",width=20,height=2,font=("Arial",12,"bold"),command=open_change_pin_window)
 change_pin_button.pack(pady=5)
+
+def logout():
+    global pin
+
+    pin = ""
+
+    update_display()
+
+    dashboard_frame.pack_forget()
+
+    login_frame.pack(fill="both",expand=True)
+
+    messagebox.showinfo(
+        "Logout",
+        "You have been logged out successfully."
+    )
+
+logout_button = tk.Button(button_frame,text="Logout",width=20,height=2,font=("Arial",12,"bold"),fg="white",bg="#B22222",activebackground="#8B0000",command=logout)
+logout_button.pack(pady=5)
     
     
 

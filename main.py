@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import messagebox
-from banking import check_pin
+from banking import check_pin, deposit_money
 from storage import load_account
 
 root = tk.Tk()
@@ -143,6 +143,63 @@ account_label.pack(pady=5)
 
 balance_label = tk.Label(dashboard_frame, font=("Arial", 14, "bold"))
 balance_label.pack(pady=10)
+
+button_frame = tk.Frame(dashboard_frame)
+button_frame.pack(pady=20)
+
+
+def open_deposit_window():
+
+    deposit_window = tk.Toplevel(root)
+    deposit_window.title("Deposit Money")
+    deposit_window.geometry("450x300")
+    deposit_window.resizable(False, False)
+
+    amount_label = tk.Label(deposit_window, text= "Enter Deposit Amount", font=("Arial", 12))
+    amount_label.pack(pady=10)
+
+    amount_entry = tk.Entry(deposit_window, font=("Arial", 14),justify="center")
+    amount_entry.pack(pady=10)
+
+    def deposit():
+        amount = amount_entry.get()
+
+        if amount == "":
+            messagebox.showerror(
+                "Error",
+                "Please enter an amount."
+            )
+            return
+        try:
+            amount = int(amount)
+        except ValueError:
+            messagebox.showerror(
+                "Error",
+                "Please enter a valid number."
+            )
+            return
+        result = deposit_money(amount)
+
+        if result == "Invalid_amount":
+            messagebox.showerror(
+                "Invalid amount",
+                "Amount must be greater than zero."
+            )
+        else:
+            messagebox.showinfo(
+                "Deposit Successful",
+                f"₹{amount} deposited successfully."
+            )
+        show_dashboard()
+        deposit_window.destroy()
+            
+
+    deposit_confirm_button = tk.Button(deposit_window, text="Deposit", width=15,fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46",command =deposit)
+    deposit_confirm_button.pack(pady=15)
+
+deposit_button = tk.Button(button_frame, text= "Deposit", font=("Arial", 12, "bold"), width =20, height=2, command=open_deposit_window)
+deposit_button.pack(pady=5)
+
 
 root.mainloop()
                     

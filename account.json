@@ -2,8 +2,11 @@
     "account_holder": "Nishanth G",
     "account_number": "1001",
     "pin": "1234",
-    "balance": 5000,
+    "balance": 6500,
     "failed_attempts": 0,
     "locked": false,
-    "transcations": []
+    "transactions": [
+        "Deposited \u20b91000",
+        "Deposited \u20b9500"
+    ]
 }

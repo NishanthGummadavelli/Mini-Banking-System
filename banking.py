@@ -21,3 +21,16 @@ def check_pin(entered_pin):
     if account["locked"]:
         return "locked"
     return "Invalid_pin"
+
+def deposit_money(amount):
+    account = load_account()
+    if amount <= 0:
+        return "Invalid_amount"
+    account["balance"] += amount
+
+    account["transactions"].append(f"Deposited ₹{amount}")
+
+    save_account(account)
+
+    return "Success"
+    

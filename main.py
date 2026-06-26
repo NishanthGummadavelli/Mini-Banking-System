@@ -1,7 +1,7 @@
 
 
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 from banking import check_pin, deposit_money, withdraw_money
 from storage import load_account
 
@@ -260,6 +260,42 @@ def open_withdraw_window():
 
 withdraw_button = tk.Button(button_frame,text="Withdraw", width=20,height=2,font=("Arial",12,"bold"),command=open_withdraw_window)
 withdraw_button.pack(pady=5)
+
+
+def open_history_window():
+    history_window = tk.Toplevel(root)
+    history_window.title("Transaction History")
+    history_window.geometry("650x400")
+    history_window.resizable(False, False)
+
+    account = load_account()
+    transactions = account["transactions"]
+
+    list_frame = tk.Frame(history_window)
+    list_frame.pack(pady=20)
+
+    scrollbar = tk.Scrollbar(list_frame)
+    scrollbar.pack(side=tk.RIGHT, fill= tk.Y)
+
+    history_listbox = tk.Listbox(list_frame, width=70,height=15,font=("Arial",11),yscrollcommand=scrollbar.set)
+    history_listbox.pack(side=tk.LEFT)
+
+    scrollbar.config(command=history_listbox.yview)
+
+    #Handle Empty History
+    if not transactions:
+        history_listbox.insert(tk.END, "No recent transactions")
+    else:
+        for transaction in transactions:
+            history_listbox.insert(tk.END, transaction)
+
+    close_button = tk.Button(history_window, text= "Close", bg= "red",width=15,command=history_window.destroy)
+    close_button.pack(pady=10)
+    
+
+
+history_button = tk.Button(button_frame, text = "Transaction History", font=("Arial",12,"bold"),width=20,height=2,command=open_history_window)
+history_button.pack(pady=5)
     
 
 

@@ -52,4 +52,17 @@ def withdraw_money(amount):
     save_account(account)
 
     return "success"
+
+def change_pin(current_pin,new_pin):
+    account = load_account()
+
+    if current_pin != account["pin"]:
+        return "incorrect_pin"
+    if new_pin == account["pin"]:
+        return "same_pin"
+    
+    account["pin"] = new_pin
+    save_account(account)
+    
+    return "success"
     

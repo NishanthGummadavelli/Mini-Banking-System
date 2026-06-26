@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import messagebox, ttk
-from banking import check_pin, deposit_money, withdraw_money
+from banking import check_pin, deposit_money, withdraw_money, change_pin
 from storage import load_account
 
 root = tk.Tk()
@@ -299,6 +299,85 @@ def open_history_window():
 
 history_button = tk.Button(button_frame, text = "Transaction History", font=("Arial",12,"bold"),width=20,height=2,command=open_history_window)
 history_button.pack(pady=5)
+
+def open_change_pin_window():
+    change_pin_window = tk.Toplevel(root)
+    change_pin_window.title("Change PIN")
+    change_pin_window.geometry("400x350")
+    change_pin_window.resizable(False, False)
+
+    current_pin_label = tk.Label(change_pin_window,text="Current PIN",font=("Arial",12))
+    current_pin_entry = tk.Entry(change_pin_window,font=("Arial",12),show="*")
+    current_pin_label.pack(pady=(20,5))
+    current_pin_entry.pack()
+
+    new_pin_label = tk.Label(change_pin_window,text="New PIN",font=("Arial",12))
+    new_pin_label.pack(pady=(15,5))
+    new_pin_entry = tk.Entry(change_pin_window, show="*",font=("Arial",12))
+    new_pin_entry.pack()
+
+    confirm_new_pin_label = tk.Label(change_pin_window,text="Confirm New PIN",font=("Arial",12))
+    confirm_new_pin_label.pack(pady=(15,5))
+    confirm_new_pin_entry = tk.Entry(change_pin_window,font=("Arial",12),show="*")
+    confirm_new_pin_entry.pack()
+
+    
+    def change_pin_action():
+        current_pin = current_pin_entry.get()
+        new_pin = new_pin_entry.get()
+        confirm_pin = confirm_new_pin_entry.get()
+
+        if current_pin == "" or new_pin == "" or confirm_pin == "":
+            messagebox.showerror(
+                "Error",
+                "Please fill all the fields."
+            )
+            return
+        if len(current_pin) != 4 or len(confirm_pin) != 4 or len(new_pin) != 4:
+            messagebox.showerror(
+                "Error",
+                "PIN must contain exactly 4 digits."
+            )
+            return
+        if not current_pin.isdigit() or not new_pin.isdigit() or not confirm_pin.isdigit():
+            messagebox.showerror(
+                "Error",
+                "PIN must contain only digits."
+            )
+            return
+        if new_pin != confirm_pin:
+            messagebox.showerror(
+                "Error",
+                "New PIN and Confirm PIN do not match."
+            )
+            return
+        result = change_pin(current_pin, new_pin)
+
+        if result == "incorrect_pin":
+            messagebox.showerror("Error",
+                                 "Current PIN is incorrect."
+            )
+        elif result == "same_pin":
+            messagebox.showerror(
+                "Error",
+                "New PIN must be different from the Current PIN."
+            )
+        else:
+            messagebox.showinfo(
+                "Success",
+                "PIN changed Successfully."
+            )
+
+            change_pin_window.destroy()
+
+        
+    change_button = tk.Button(change_pin_window,text="Change PIN",width=18,height=2,bg="green",command=change_pin_action)
+    change_button.pack(pady=20)
+
+        
+change_pin_button = tk.Button(button_frame,text="Change PIN",width=20,height=2,font=("Arial",12,"bold"),command=open_change_pin_window)
+change_pin_button.pack(pady=5)
+    
     
 
 

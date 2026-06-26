@@ -1,7 +1,7 @@
 {
     "account_holder": "Nishanth G",
     "account_number": "1001",
-    "pin": "1234",
+    "pin": "5678",
     "balance": 5000,
     "failed_attempts": 0,
     "locked": false,
@@ -9,6 +9,7 @@
         "26-06-2026 11:48 AM - Deposited ₹1000",
         "26-06-2026 11:51 AM - Withdrew ₹1000",
         "26-06-2026 12:19 PM - Deposited ₹250",
-        "26-06-2026 12:19 PM - Withdrew ₹250"
+        "26-06-2026 12:19 PM - Withdrew ₹250",
+        "26-06-2026 03:16 PM - PIN Changed"
     ]
 }

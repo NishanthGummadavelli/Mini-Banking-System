@@ -62,6 +62,8 @@ def change_pin(current_pin,new_pin):
         return "same_pin"
     
     account["pin"] = new_pin
+    current_time = datetime.now().strftime("%d-%m-%Y %I:%M %p")
+    account["transactions"].append(f"{current_time} - PIN Changed")
     save_account(account)
     
     return "success"

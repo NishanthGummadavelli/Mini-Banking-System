@@ -6,10 +6,11 @@ from banking import check_pin, deposit_money, withdraw_money, change_pin
 from storage import load_account
 
 root = tk.Tk()
-login_frame = tk.Frame(root)
+login_frame = tk.Frame(root, bg="#F5F7FA")
 dashboard_frame = tk.Frame(root)
 
 root.title("Mini Banking System")
+root.configure(bg="#F5F7FA")
 
 root.geometry("500x650")
 root.resizable(True, True)
@@ -19,10 +20,10 @@ root.config(menu=menu_bar)
 
 pin = ""
 
-title_label = tk.Label(login_frame, text= "Mini Banking System", font =("Arial", 20, "bold"))
+title_label = tk.Label(login_frame, text= "Mini Banking System", font =("Segoe UI", 11))
 title_label.pack(pady=20)
 
-display = tk.Entry(login_frame,font = ("Arial", 18), justify = "center",show = "*", width = 12, state = "readonly")
+display = tk.Entry(login_frame,font = ("Segoe UI", 11), justify = "center",show = "*", width = 12, state = "readonly")
 display.pack(pady=10)
 
 def update_display():
@@ -107,10 +108,10 @@ for text, row, column in buttons:
     else:
         command = lambda value =text: add_digit(value)
 
-    button = tk.Button(keypad, text =text, width=8, height=2, font = ("Arial", 12), command = command)
+    button = tk.Button(keypad, text =text, width=8, height=2, font = ("Segoe UI", 11, "bold"), command = command)
     button.grid(row=row, column= column, padx=5, pady= 5)
 
-login_button = tk.Button(login_frame, text= "LOGIN", font=("Arial", 14, "bold"), fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46", command = login)
+login_button = tk.Button(login_frame, text= "LOGIN", font=("Segoe UI", 11, "bold"), fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46", command = login)
 login_button.pack(pady=20)
 
 login_frame.pack(fill = "both", expand=True)
@@ -135,16 +136,16 @@ def show_dashboard():
     login_frame.pack_forget() #Hides the login frame
     dashboard_frame.pack(fill="both",expand =True)
 
-dashboard_title = tk.Label(dashboard_frame, text = "Mini Banking System", font=("Arial", 20,"bold"))
+dashboard_title = tk.Label(dashboard_frame, text = "Mini Banking System", font=("Segoe UI", 11))
 dashboard_title.pack(pady=20)
 
-welcome_label = tk.Label(dashboard_frame, font=("Arial", 16))
+welcome_label = tk.Label(dashboard_frame, font=("Segoe UI", 11))
 welcome_label.pack(pady=5)
 
-account_label = tk.Label(dashboard_frame, font=("Arial", 14))
+account_label = tk.Label(dashboard_frame, font=("Segoe UI", 11))
 account_label.pack(pady=5)
 
-balance_label = tk.Label(dashboard_frame, font=("Arial", 14, "bold"))
+balance_label = tk.Label(dashboard_frame, font=("Segoe UI", 11))
 balance_label.pack(pady=10)
 
 button_frame = tk.Frame(dashboard_frame)
@@ -158,10 +159,10 @@ def open_deposit_window():
     deposit_window.geometry("450x300")
     deposit_window.resizable(False, False)
 
-    amount_label = tk.Label(deposit_window, text= "Enter Deposit Amount", font=("Arial", 12))
+    amount_label = tk.Label(deposit_window, text= "Enter Deposit Amount", font=("Segoe UI", 11))
     amount_label.pack(pady=10)
 
-    amount_entry = tk.Entry(deposit_window, font=("Arial", 14),justify="center")
+    amount_entry = tk.Entry(deposit_window, font=("Segoe UI", 11),justify="center")
     amount_entry.pack(pady=10)
 
     def deposit():
@@ -199,8 +200,9 @@ def open_deposit_window():
 
     deposit_confirm_button = tk.Button(deposit_window, text="Deposit", width=15,fg="white", bg="#2E8B57", activeforeground="red",activebackground="#1E6F46",command =deposit)
     deposit_confirm_button.pack(pady=15)
+    
 
-deposit_button = tk.Button(button_frame, text= "Deposit", font=("Arial", 12, "bold"), width =20, height=2, command=open_deposit_window)
+deposit_button = tk.Button(button_frame, text= "Deposit", font=("Segoe UI", 11), width =20, height=2, command=open_deposit_window)
 deposit_button.pack(pady=5)
 
 
@@ -211,11 +213,12 @@ def open_withdraw_window():
     withdraw_window.geometry("450x300")
     withdraw_window.resizable(False, False)
 
-    amount_label = tk.Label(withdraw_window, text = "Enter Withdrawal Amount", font=("Arial", 12))
+    amount_label = tk.Label(withdraw_window, text = "Enter Withdrawal Amount", font=("Segoe UI", 11))
     amount_label.pack(pady=10)
 
-    amount_entry = tk.Entry(withdraw_window, font=("Arial", 14), justify = "center")
+    amount_entry = tk.Entry(withdraw_window, font=("Segoe UI", 11), justify = "center")
     amount_entry.pack(pady=10)
+
 
 
     def withdraw():
@@ -256,12 +259,13 @@ def open_withdraw_window():
             show_dashboard()
             withdraw_window.destroy()
 
-    withdraw_confirm_button = tk.Button(withdraw_window, text="Withdraw", width=15,height=2,command=withdraw)
+    withdraw_confirm_button = tk.Button(withdraw_window, text="Withdraw", width=15,height=2,command=withdraw,bg="#FF8C00")
     withdraw_confirm_button.pack(pady=15)
+    
             
         
 
-withdraw_button = tk.Button(button_frame,text="Withdraw", width=20,height=2,font=("Arial",12,"bold"),command=open_withdraw_window)
+withdraw_button = tk.Button(button_frame,text="Withdraw", width=20,height=2,font=("Segoe UI",11),command=open_withdraw_window)
 withdraw_button.pack(pady=5)
 
 
@@ -288,6 +292,11 @@ def open_history_window():
     tree.pack(side="left",fill="both",expand="True",padx=10,pady=15)
     scrollbar.pack(side="right",fill="y")
 
+    style = ttk.Style()
+
+    style.configure("Treeview.Heading",font=("Segoe UI",11,"bold"))
+    style.configure("Treeview",font=("Segoe UI",10),rowheight=28)
+
     if not transactions:
         tree.insert("",tk.END,values=("","No transactions available."))
     else:
@@ -295,12 +304,12 @@ def open_history_window():
             date_time,transaction = entry.split(" - ", 1)
             tree.insert("",tk.END,values=(date_time,transaction))
 
-    close_button = tk.Button(history_window, text= "Close", bg= "red",width=15,command=history_window.destroy)
+    close_button = tk.Button(history_window, text= "Close",width=15,command=history_window.destroy,bg="#1E90FF")
     close_button.pack(pady=10)
     
 
 
-history_button = tk.Button(button_frame, text = "Transaction History", font=("Arial",12,"bold"),width=20,height=2,command=open_history_window)
+history_button = tk.Button(button_frame, text = "Transaction History", font=("Segoe UI",11),width=20,height=2,command=open_history_window)
 history_button.pack(pady=5)
 
 def open_change_pin_window():
@@ -309,19 +318,19 @@ def open_change_pin_window():
     change_pin_window.geometry("400x350")
     change_pin_window.resizable(False, False)
 
-    current_pin_label = tk.Label(change_pin_window,text="Current PIN",font=("Arial",12))
-    current_pin_entry = tk.Entry(change_pin_window,font=("Arial",12),show="*")
+    current_pin_label = tk.Label(change_pin_window,text="Current PIN",font=("Segoe UI",12))
+    current_pin_entry = tk.Entry(change_pin_window,font=("Segoe UI",12),show="*")
     current_pin_label.pack(pady=(20,5))
     current_pin_entry.pack()
 
-    new_pin_label = tk.Label(change_pin_window,text="New PIN",font=("Arial",12))
+    new_pin_label = tk.Label(change_pin_window,text="New PIN",font=("Segoe UI",12))
     new_pin_label.pack(pady=(15,5))
-    new_pin_entry = tk.Entry(change_pin_window, show="*",font=("Arial",12))
+    new_pin_entry = tk.Entry(change_pin_window, show="*",font=("Segoe UI",12))
     new_pin_entry.pack()
 
-    confirm_new_pin_label = tk.Label(change_pin_window,text="Confirm New PIN",font=("Arial",12))
+    confirm_new_pin_label = tk.Label(change_pin_window,text="Confirm New PIN",font=("Segoe UI",12))
     confirm_new_pin_label.pack(pady=(15,5))
-    confirm_new_pin_entry = tk.Entry(change_pin_window,font=("Arial",12),show="*")
+    confirm_new_pin_entry = tk.Entry(change_pin_window,font=("Segoe UI",12),show="*")
     confirm_new_pin_entry.pack()
 
     
@@ -376,9 +385,10 @@ def open_change_pin_window():
         
     change_button = tk.Button(change_pin_window,text="Change PIN",width=18,height=2,bg="green",command=change_pin_action)
     change_button.pack(pady=20)
+    
 
         
-change_pin_button = tk.Button(button_frame,text="Change PIN",width=20,height=2,font=("Arial",12,"bold"),command=open_change_pin_window)
+change_pin_button = tk.Button(button_frame,text="Change PIN",width=20,height=2,font=("Segoe UI",11),command=open_change_pin_window)
 change_pin_button.pack(pady=5)
 
 def logout():
@@ -397,7 +407,7 @@ def logout():
         "You have been logged out successfully."
     )
 
-logout_button = tk.Button(button_frame,text="Logout",width=20,height=2,font=("Arial",12,"bold"),fg="white",bg="#B22222",activebackground="#8B0000",command=logout)
+logout_button = tk.Button(button_frame,text="Logout",width=20,height=2,font=("Segoe UI",11,"bold"),fg="white",bg="#B22222",activebackground="#8B0000",command=logout)
 logout_button.pack(pady=5)
 
 def exit_application():

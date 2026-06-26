@@ -14,6 +14,9 @@ root.title("Mini Banking System")
 root.geometry("500x650")
 root.resizable(True, True)
 
+menu_bar = tk.Menu(root)
+root.config(menu=menu_bar)
+
 pin = ""
 
 title_label = tk.Label(login_frame, text= "Mini Banking System", font =("Arial", 20, "bold"))
@@ -396,7 +399,52 @@ def logout():
 
 logout_button = tk.Button(button_frame,text="Logout",width=20,height=2,font=("Arial",12,"bold"),fg="white",bg="#B22222",activebackground="#8B0000",command=logout)
 logout_button.pack(pady=5)
+
+def exit_application():
+
+    answer = messagebox.askyesno(
+        "Exit",
+        "Are you sure you want to exit?"
+    )
+
+    if answer:
+        root.destroy()
+
+def customer_care():
+
+    messagebox.showinfo(
+        "Customer Care",
+        "Mini Banking System\n\n"
+        "Phone : + 91 8890601212\n"
+        "Email : support@minibank.com\n\n"
+        "Available : Monday - Friday\n"
+        "9:00 AM - 6:00 PM")
+
+def about():
     
+    messagebox.showinfo(
+        "About",
+        "Mini Banking System\n\n"
+        "Version : 1.0\n\n"
+        "Developed By:\n"
+        "Nishanth Gummadavelli\n\n"
+        "Technologies Used:\n"
+        "• Python\n"
+        "• Tkinter\n"
+        "• JSON\n"
+        "• Git & GitHub"
+    )
+
+file_menu = tk.Menu(menu_bar, tearoff=0)
+
+menu_bar.add_cascade(label = "File", menu=file_menu)
+file_menu.add_command(label = "Exit", command=exit_application)
+
+help_menu = tk.Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="Help", menu=help_menu)
+help_menu.add_command(label="Customer Care", command=customer_care)
+help_menu.add_separator()
+help_menu.add_command(label="About",command=about)
     
 
 

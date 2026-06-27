@@ -102,13 +102,13 @@ python main.py
 
 ## Login Screen
 
-![Login Screen](screenshots\login.png)
+![Login Screen](screenshots/login.png)
 
 ---
 
 ## Dashboard
 
-![Dashboard](screenshots\dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 ---
 

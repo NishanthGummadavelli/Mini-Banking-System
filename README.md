@@ -102,43 +102,43 @@ python main.py
 
 ## Login Screen
 
-![Login Screen]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\login.png")
+![Login Screen](screenshots\login.png)
 
 ---
 
 ## Dashboard
 
-![Dashboard]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\dashboard.png")
+![Dashboard](screenshots\dashboard.png)
 
 ---
 
 ## Deposit
 
-![Deposit]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\withdraw.png")
+![Deposit](screenshots/deposit.png)
 
 ---
 
 ## Withdraw
 
-![Withdraw]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\withdraw.png")
+![Withdraw](screenshots/withdraw.png)
 
 ---
 
 ## Transaction History
 
-![Transaction History]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\transaction_history.png")
+![Transaction History](screenshots/transaction_history.png)
 
 ---
 
 ## Change PIN
 
-![Change PIN]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\change_pin.png")
+![Change PIN](screenshots/change_pin.png)
 
 ---
 
 ## About
 
-![About]("D:\Python-GitHub Projects\Mini-Banking-System\screenshots\about.png")
+![About](screenshots/about.png)
 
 ---
 
